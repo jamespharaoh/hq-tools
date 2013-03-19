@@ -10,7 +10,7 @@ Gem::Specification.new do
 	|spec|
 
 	spec.name = "hq-tools"
-	spec.version = "0.1.0"
+	spec.version = "0.1.1"
 	spec.platform = Gem::Platform::RUBY
 	spec.authors = [ "James Pharaoh" ]
 	spec.email = [ "james@phsys.co.uk" ]
@@ -29,15 +29,14 @@ Gem::Specification.new do
 	spec.add_development_dependency "simplecov"
 
 	spec.files = Dir[
-
-		"features/**/*.feature",
-		"features/**/*.rb",
-
 		"lib/**/*.rb",
-
 	]
 
-	spec.test_files = []
+	spec.test_files = Dir[
+		"features/**/*.feature",
+		"features/**/*.rb",
+		"spec/**/*-spec.rb",
+	]
 
 	spec.executables = []
 
