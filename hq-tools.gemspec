@@ -33,7 +33,7 @@ Gem::Specification.new do
 		"features/**/*.feature",
 		"features/**/*.rb",
 
-		"ruby/**/*.rb",
+		"lib/**/*.rb",
 
 	]
 
@@ -41,7 +41,7 @@ Gem::Specification.new do
 
 	spec.executables = []
 
-	spec.require_paths = [ "ruby" ]
+	spec.require_paths = [ "lib" ]
 
 end
 
