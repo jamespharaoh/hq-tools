@@ -21,9 +21,8 @@ Gem::Specification.new do
 
 	spec.rubyforge_project = "hq-tools"
 
-	spec.add_dependency "rake", ">= 10.0.3"
-
 	spec.add_development_dependency "cucumber", ">= 1.2.1"
+	spec.add_development_dependency "rake", ">= 10.0.3"
 	spec.add_development_dependency "rspec", ">= 2.12.0"
 	spec.add_development_dependency "rspec_junit_formatter"
 	spec.add_development_dependency "simplecov"

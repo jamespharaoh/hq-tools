@@ -1,8 +1,7 @@
 PATH
   remote: .
   specs:
-    hq-tools (0.1.1)
-      rake (>= 10.0.3)
+    hq-tools (0.2.0)
 
 GEM
   remote: https://rubygems.org/
@@ -42,6 +41,7 @@ PLATFORMS
 DEPENDENCIES
   cucumber (>= 1.2.1)
   hq-tools!
+  rake (>= 10.0.3)
   rspec (>= 2.12.0)
   rspec_junit_formatter
   simplecov
