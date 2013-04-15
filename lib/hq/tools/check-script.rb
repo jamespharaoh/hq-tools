@@ -13,6 +13,7 @@ class CheckScript
 		@critical = false
 		@warning = false
 		@unknown = false
+		@performances = []
 		@postscript = []
 		@stdout = $stdout
 		@stderr = $stderr
@@ -48,25 +49,36 @@ class CheckScript
 
 	def perform_output
 
+		str = StringIO.new
+
+		str.print @name, " "
+
 		if @critical
-			@stdout.puts "#{@name} CRITICAL: #{@messages.join ", "}"
-			@status = 2
-
+			str.print "CRITICAL"
 		elsif @warning
-			@stdout.puts "#{@name} WARNING: #{@messages.join ", "}"
-			@status = 1
-
+			str.print "WARNING"
 		elsif @unknown
-			@stdout.puts "#{@name} UNKNOWN: #{@messages.join ", "}"
-			@status = 3
-
+			str.print "UNKNOWN"
 		else
-			@stdout.puts "#{@name} OK: #{@messages.join ", "}"
-			@status = 0
+			str.print "OK"
 		end
 
-		@postscript.each do |ps|
-			@stderr.puts ps
+		str.print ": "
+
+		str.print @messages.join(", ")
+
+		unless @performances.empty?
+			str.print " | "
+			str.print @performances.join(" ")
+		end
+
+		str.print "\n"
+
+		@stdout.print str.string
+
+		@postscript.each do
+			|postscript|
+			@stderr.puts postscript
 		end
 
 	end
@@ -88,6 +100,17 @@ class CheckScript
 	def unknown string
 		@messages << string
 		@unknown = true
+	end
+
+	def performance name, value, options = {}
+		parts = []
+		parts[0] = "%s%s" % [ value, options[:units] ]
+		parts[1] = options[:warning].to_s if options[:warning]
+		parts[2] = options[:critical].to_s if options[:critical]
+		parts[3] = options[:minimum].to_s if options[:minimum]
+		parts[4] = options[:maximum].to_s if options[:maximum]
+		name = "'#{name.gsub "'", "''"}'" if name.include? "'"
+		@performances << "%s=%s" % [ name, parts.join(";") ]
 	end
 
 end
