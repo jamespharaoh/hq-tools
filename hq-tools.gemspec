@@ -10,7 +10,7 @@ Gem::Specification.new do
 	|spec|
 
 	spec.name = "hq-tools"
-	spec.version = "0.4.1"
+	spec.version = "0.4.2"
 	spec.platform = Gem::Platform::RUBY
 	spec.authors = [ "James Pharaoh" ]
 	spec.email = [ "james@phsys.co.uk" ]
