@@ -32,7 +32,7 @@ describe CheckScript do
 				"Unnamed OK: hello | metric1=1\n"
 		end
 
-		it "special chars" do
+		it "apostrophe" do
 			subject.stub(:perform_checks) do
 				subject.message "hello"
 				subject.performance "apos'trophe", 1
@@ -40,6 +40,16 @@ describe CheckScript do
 			subject.main
 			subject.stdout.string.should ==
 				"Unnamed OK: hello | 'apos''trophe'=1\n"
+		end
+
+		it "whitespace" do
+			subject.stub(:perform_checks) do
+				subject.message "hello"
+				subject.performance "white space", 1
+			end
+			subject.main
+			subject.stdout.string.should ==
+				"Unnamed OK: hello | 'white space'=1\n"
 		end
 
 		it "optional fields" do

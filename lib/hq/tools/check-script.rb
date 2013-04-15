@@ -109,7 +109,7 @@ class CheckScript
 		parts[2] = options[:critical].to_s if options[:critical]
 		parts[3] = options[:minimum].to_s if options[:minimum]
 		parts[4] = options[:maximum].to_s if options[:maximum]
-		name = "'#{name.gsub "'", "''"}'" if name.include? "'"
+		name = "'#{name.gsub "'", "''"}'" if name =~ /[ ']/
 		@performances << "%s=%s" % [ name, parts.join(";") ]
 	end
 
