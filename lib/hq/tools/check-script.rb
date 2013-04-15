@@ -55,12 +55,16 @@ class CheckScript
 
 		if @critical
 			str.print "CRITICAL"
+			@status = 2
 		elsif @warning
 			str.print "WARNING"
+			@status = 1
 		elsif @unknown
 			str.print "UNKNOWN"
+			@status = 3
 		else
 			str.print "OK"
+			@status = 0
 		end
 
 		str.print ": "

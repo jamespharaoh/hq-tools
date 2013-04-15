@@ -11,6 +11,56 @@ describe CheckScript do
 		subject.stdout = StringIO.new
 	end
 
+	context "status" do
+
+		it "critical" do
+			subject.stub(:perform_checks) do
+				subject.critical "critical"
+				subject.warning "warning"
+				subject.unknown "unknown"
+				subject.message "ok"
+			end
+			subject.main
+			subject.stdout.string.should ==
+				"Unnamed CRITICAL: critical, warning, unknown, ok\n"
+			subject.status.should == 2
+		end
+
+		it "warning" do
+			subject.stub(:perform_checks) do
+				subject.warning "warning"
+				subject.unknown "unknown"
+				subject.message "ok"
+			end
+			subject.main
+			subject.stdout.string.should ==
+				"Unnamed WARNING: warning, unknown, ok\n"
+			subject.status.should == 1
+		end
+
+		it "unknown" do
+			subject.stub(:perform_checks) do
+				subject.unknown "unknown"
+				subject.message "ok"
+			end
+			subject.main
+			subject.stdout.string.should ==
+				"Unnamed UNKNOWN: unknown, ok\n"
+			subject.status.should == 3
+		end
+
+		it "ok" do
+			subject.stub(:perform_checks) do
+				subject.message "ok"
+			end
+			subject.main
+			subject.stdout.string.should ==
+				"Unnamed OK: ok\n"
+			subject.status.should == 0
+		end
+
+	end
+
 	context "performance data" do
 
 		it "none" do
