@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    hq-tools (0.7.0)
+    hq-tools (0.8.0)
 
 GEM
   remote: https://rubygems.org/
